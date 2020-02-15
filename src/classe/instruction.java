@@ -3,19 +3,39 @@ package classe;
 import org.mockito.Mockito.*;
 
 public class instruction {
-	public void Instruction(String commande) {
+	
+	public instruction() {}
+	
+	public void SetInstruction(fabricant f) {
+		String commande= f.GetCommande();
+		double montant = f.GetSomme();
 		String[] parts = commande.trim().split(":");
 		String boisson = parts[0];
 		String nbSucre = parts[1];
 		
 		if (boisson == "C") {
-			this.Cafe();
+			if(montant >= 0.6) {
+				this.Cafe();
+			}
+			else {
+				f.ManqueMonnaie(0.6);
+			}
 		}
 		else if (boisson == "T") {
-			this.The();
+			if(montant >= 0.4) {
+				this.The();
+			}
+			else {
+				f.ManqueMonnaie(0.4);
+			}
 		}
 		else if (boisson == "H") {
-			this.Chocolat();
+			if(montant >= 0.5) {
+				this.Chocolat();
+			}
+			else {
+				f.ManqueMonnaie(0.5);
+			}
 		}
 		else if (boisson == "M"){
 			this.Message(nbSucre);
