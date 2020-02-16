@@ -4,6 +4,10 @@ import org.mockito.Mockito.*;
 
 public class instruction {
 	
+	int nbCafe=0;
+	int nbThe=0;
+	int nbChocolat=0;
+	int nbJusOrange=0;
 	public instruction() {}
 	
 	public void SetInstruction(fabricant f) {
@@ -77,6 +81,7 @@ public class instruction {
 		else {
 			//code pour faire un café
 		}
+		this.nbCafe=this.nbCafe+1;
 	}
 	
 	public void The(boolean chaud) {
@@ -86,6 +91,7 @@ public class instruction {
 		else {
 			//code pour faire un thé
 		}
+		this.nbThe=this.nbThe+1;
 	}
 	
 	public void Chocolat(boolean chaud) {
@@ -93,10 +99,12 @@ public class instruction {
 		if (chaud == true) {
 			this.Chocolat(false);
 		}
+		this.nbChocolat=this.nbChocolat+1;
 	}
 	
 	public void JusOrange() {
 		//code pour faire un jus d'orange
+		this.nbJusOrange=this.nbJusOrange+1;
 	}
 	
 	public void Message(String message) {
@@ -110,5 +118,15 @@ public class instruction {
 	
 	public void AddBaton() {
 		//ajoute la touillette
+	}
+	
+	public double Rapport() {
+		double ChiffreAffaire=(this.nbCafe*0.6)+(this.nbThe*0.4)+(this.nbChocolat*0.5)+(this.nbJusOrange*0.6);
+		System.out.println("nombre de café vendu: "+String.valueOf(nbCafe)+"\n");
+		System.out.println("nombre de thé vendu: "+String.valueOf(nbThe)+"\n");
+		System.out.println("nombre de chocolat vendu: "+String.valueOf(nbChocolat)+"\n");
+		System.out.println("nombre de jus d'orange vendu: "+String.valueOf(nbJusOrange)+"\n");
+		System.out.println("Chiffre d'affaire total: "+String.valueOf(ChiffreAffaire));
+		return ChiffreAffaire;
 	}
 }
