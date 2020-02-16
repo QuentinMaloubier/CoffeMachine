@@ -2,13 +2,14 @@ package classe;
 
 import org.mockito.Mockito.*;
 
-public class instruction {
+public class instruction implements BeverageQuantityChecker{
 	
 	int nbCafe=0;
 	int nbThe=0;
 	int nbChocolat=0;
 	int nbJusOrange=0;
 	public instruction() {}
+	fabricant f;
 	
 	public void SetInstruction(fabricant f) {
 		String commande= f.GetCommande();
@@ -19,36 +20,42 @@ public class instruction {
 		String nbSucre = parts[1];
 		
 		if (boisson.contains("C") == true) {
-			if(montant >= 0.6) {
-				if (boisson.contains("h")) {
-					chaud =true;
+			if (isEmpty("C")==false) {
+				if(montant >= 0.6) {
+					if (boisson.contains("h")) {
+						chaud =true;
+					}
+					this.Cafe(chaud);
 				}
-				this.Cafe(chaud);
-			}
-			else {
-				f.ManqueMonnaie(0.6);
+				else {
+					f.ManqueMonnaie(0.6);
+				}
 			}
 		}
 		else if (boisson.contains("T") == true) {
-			if(montant >= 0.4) {
-				if (boisson.contains("h")) {
-					chaud =true;
+			if (isEmpty("T")==false) {
+				if(montant >= 0.4) {
+					if (boisson.contains("h")) {
+						chaud =true;
+					}
+					this.The(chaud);
 				}
-				this.The(chaud);
-			}
-			else {
-				f.ManqueMonnaie(0.4);
+				else {
+					f.ManqueMonnaie(0.4);
+				}
 			}
 		}
 		else if (boisson.contains("H") == true) {
-			if(montant >= 0.5) {
-				if (boisson.contains("h")) {
-					chaud =true;
+			if (isEmpty("H")==false) {
+				if(montant >= 0.5) {
+					if (boisson.contains("h")) {
+						chaud =true;
+					}
+					this.Chocolat(chaud);
 				}
-				this.Chocolat(chaud);
-			}
-			else {
-				f.ManqueMonnaie(0.5);
+				else {
+					f.ManqueMonnaie(0.5);
+				}
 			}
 		}
 		else if (boisson == "M"){
@@ -128,5 +135,18 @@ public class instruction {
 		System.out.println("nombre de jus d'orange vendu: "+String.valueOf(nbJusOrange)+"\n");
 		System.out.println("Chiffre d'affaire total: "+String.valueOf(ChiffreAffaire));
 		return ChiffreAffaire;
+	}
+
+	@Override
+	public boolean isEmpty(String drink) {
+		if (f.GetQauntiteEau()== 0 || f.GetQauntiteLait()==0) {
+			f.notifyMissingDrink(drink);
+			f.SetCommande("M : Cette boisson est en pénurie");
+			this.SetInstruction(f);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

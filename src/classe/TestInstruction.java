@@ -9,7 +9,7 @@ public class TestInstruction {
 		instruction i = new instruction();
 		fabricant f = new fabricant();
 		f.SetCommande("C: : ");
-		f.SetSomme(1);
+		f.SetSomme(0.3);
 		i.SetInstruction(f);
 		double result=i.Rapport();
 		assertEquals("0.6",String.valueOf(result));
