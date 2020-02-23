@@ -36,7 +36,7 @@ class Machine {
 		}
 		else if (boisson == "T") {
 			if(montant >= 0.4) {
-				this.Cafe();
+				this.The();
 			}
 			else {
 				this.ManqueMonnaie(0.4);
@@ -44,7 +44,7 @@ class Machine {
 		}
 		else if (boisson == "H") {
 			if(montant >= 0.5) {
-				this.Cafe();
+				this.Chocolat();
 			}
 			else {
 				this.ManqueMonnaie(0.5);
